@@ -7,25 +7,26 @@
         $text = $json->result->pareneters->text;
       
       switch($text)   {
-            case   'hi' :
+            case 'hi':
                $speech = "Hi, Nice to meet you";
                break;
 
-            case  'bye' 
+            case 'bye' 
                $speech = "Bye, good night"; 	
                break;
 
-            case  'anything' 
+            case 'anything' 
                $speech = "Yes, you can type anything here";
                break;
 
             default: 
                $speech = "Sorry, I didn't get that. Please ask me something else."
                break; 
-        echo "test";
+
       }
+        echo "test";
    else
    {
-        echo "Method not allowed 1";
+        echo "Method not allowed 12";
    }
    ?>
