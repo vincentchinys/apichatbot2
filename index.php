@@ -1,31 +1,36 @@
-<?php
+<?php $method = $_SERVER['REQUEST_METHOD']; 
 
-$method = $_SERVER['REQUEST_METHOD'];
+if($method == 'POST'){ 
 
-if($method == ""){
-	$requestBody = file_get_contents('php://input');
-	$json = json_decode(requestBody);
+	$requestBody = file_get_contents('php://input'); 
+	$json = json_decode($requestBody); 
+	$text = $json->result->parameters->text; 
+
+	switch ($text) { 
+
+	case 'hi': 
+	$speech = "hi vince";
+	break; 
+
+	case 'bye': 
+	$speech = "Bye, good night"; 
+	break; 
 	
-	$text = $json->result->parameters->text;
+	case 'anything': 
+	$speech = "Yes, you can type anything here."; 
+	break; 
+
+	default: $speech = "Sorry ."; 
+	break; 
+
+	} 
+	$response = new \stdClass(); 
+	// Aqui defino el objeto php 
+	$response->speech = $speech; 
+	$response->displayText = $speech; 
+	$response->source = "webhook"; 
+	echo json_encode($response); 
+	// Aqui devuelvo el Objeto php en formato JSON 
 	
-	switch ($text){
-		case 'hi':
-		$speech = "Hi Vincent";
-		break;
-		
-		default:
-		$speech = "Sorry Vincent";
-		break;
-		
-	}
-	
-	$response = new \stdClass();
-	$response->speech = "";
-	$response->displayText = "";
-	$response->source = "webhook";
-	echo json_decode($response);
-}
-else
-{
-	echo "Method not allowed";
-}
+} else 
+{ echo "Method not allowed"; } ?>
